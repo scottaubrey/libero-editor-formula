@@ -1,0 +1,18 @@
+# Default values for jats-validator.
+# This is a YAML-formatted file.
+# Declare variables to be passed into your templates.
+
+replicaCount: 1
+
+images:
+  tag: latest
+  pullPolicy: Always
+  repository: liberoadmin/editor
+
+clientCertificate: "arn:aws:iam::512686554592:server-certificate/cloudfront/wildcard.elifesciences.org/2019.wildcard.elifesciences.org"
+
+nameOverride: ""
+fullnameOverride: ""
+
+service:
+  port: 8080

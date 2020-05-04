@@ -1,0 +1,26 @@
+apiVersion: extensions/v1beta1
+kind: Ingress
+metadata:
+  name: editor-ingress
+  labels:
+    app.kubernetes.io/name: {{ include "libero-editor.name" . }}
+    helm.sh/chart: {{ include "libero-editor.chart" . }}
+    app.kubernetes.io/instance: {{ .Release.Name }}
+    app.kubernetes.io/managed-by: {{ .Release.Service }}
+  {{- with .Values.ingress.annotations }}
+  annotations:
+    {{- toYaml . | nindent 4 }}
+  {{- end }}
+spec:
+  rules:
+  - host: {{ .Values.ingress.host }}
+    http:
+      paths:
+        - path: {{ .Values.ingress.articleStore.path }}
+          backend:
+            serviceName: editor-article-store
+            servicePort: {{ .Values.articleStore.port }}
+        - path: {{ .Values.ingress.client.path }}
+          backend:
+            serviceName: editor-client
+            servicePort: {{ .Values.client.port }}

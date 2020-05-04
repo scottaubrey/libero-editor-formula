@@ -1,28 +1,31 @@
 apiVersion: apps/v1beta2
 kind: Deployment
 metadata:
-  name: {{ include "libero-editor.fullname" . }}
+  name: {{ include "libero-editor.fullname" . }}-article-store
   labels:
     app.kubernetes.io/name: {{ include "libero-editor.name" . }}
     helm.sh/chart: {{ include "libero-editor.chart" . }}
     app.kubernetes.io/instance: {{ .Release.Name }}
     app.kubernetes.io/managed-by: {{ .Release.Service }}
+    app.kubernetes.io/component: article-store
 spec:
   replicas: {{ .Values.replicaCount }}
   selector:
     matchLabels:
       app.kubernetes.io/name: {{ include "libero-editor.name" . }}
       app.kubernetes.io/instance: {{ .Release.Name }}
+      app.kubernetes.io/component: article-store
   template:
     metadata:
       labels:
         app.kubernetes.io/name: {{ include "libero-editor.name" . }}
         app.kubernetes.io/instance: {{ .Release.Name }}
+        app.kubernetes.io/component: article-store
     spec:
       containers:
-        - name: {{ .Chart.Name }}
-          image: "{{ .Values.images.repository }}:{{ .Values.images.tag }}"
-          imagePullPolicy: {{ .Values.images.pullPolicy }}
+        - name: {{ .Chart.Name }}-article-store
+          image: "{{ .Values.articleStore.image.repository }}:{{ .Values.articleStore.image.tag }}"
+          imagePullPolicy: {{ .Values.articleStore.image.pullPolicy }}
           ports:
             - name: http
               containerPort: 8080

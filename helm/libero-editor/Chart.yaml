@@ -2,4 +2,4 @@ apiVersion: v1
 appVersion: "latest"
 description: eLife specific deployment of Libero Editor
 name: libero-editor
-version: 0.0.2
+version: 0.0.3

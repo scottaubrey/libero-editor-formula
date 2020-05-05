@@ -18,9 +18,9 @@ spec:
       paths:
         - path: {{ .Values.ingress.articleStore.path }}
           backend:
-            serviceName: editor-article-store
+            serviceName: {{ include "libero-editor.fullname" . }}-article-store
             servicePort: {{ .Values.articleStore.port }}
         - path: {{ .Values.ingress.client.path }}
           backend:
-            serviceName: editor-client
+            serviceName: {{ include "libero-editor.fullname" . }}-client
             servicePort: {{ .Values.client.port }}

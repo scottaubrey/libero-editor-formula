@@ -2,12 +2,12 @@
 
 ingress:
   host: libero-editor--staging.elifesciences.org
-  annotations:
-    nginx.ingress.kubernetes.io/rewrite-target: /$2
   client:
-    path: /()(.*)
+    path: /
   articleStore:
     path: /api/v1(/|$)(.*)
+    annotations:
+      nginx.ingress.kubernetes.io/rewrite-target: /$2
 
 client:
   image:

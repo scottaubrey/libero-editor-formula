@@ -5,7 +5,7 @@ ingress:
   annotations:
     nginx.ingress.kubernetes.io/rewrite-target: /$2
   client:
-    path: /
+    path: /()(.*)
   articleStore:
     path: /api/v1(/|$)(.*)
 

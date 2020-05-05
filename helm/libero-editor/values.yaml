@@ -1,18 +1,26 @@
-# Default values for jats-validator.
-# This is a YAML-formatted file.
-# Declare variables to be passed into your templates.
+# Default values for libero-editor.
 
-replicaCount: 1
+ingress:
+  host: libero-editor--staging.elifesciences.org
+  client:
+    path: /
+  articleStore:
+    path: /api/v1(/|$)(.*)
+    annotations:
+      nginx.ingress.kubernetes.io/rewrite-target: /$2
 
-images:
-  tag: latest
-  pullPolicy: Always
-  repository: liberoadmin/editor
+client:
+  image:
+    repository: liberoadmin/editor-client
+    tag: latest
+    pullPolicy: Always
+  port: 80
+  replicaCount: 1
 
-clientCertificate: "arn:aws:iam::512686554592:server-certificate/cloudfront/wildcard.elifesciences.org/2019.wildcard.elifesciences.org"
-
-nameOverride: ""
-fullnameOverride: ""
-
-service:
+articleStore:
+  image:
+    repository: liberoadmin/editor-article-store
+    tag: latest
+    pullPolicy: Always
   port: 8080
+  replicaCount: 1

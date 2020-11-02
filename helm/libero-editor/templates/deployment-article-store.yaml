@@ -54,7 +54,7 @@ spec:
             - name: AWS_SECRET_ACCESS_KEY
               valueFrom:
                 secretKeyRef:
-                  name: {{ .Values.aws.aws-secret | quote }}
+                  name: {{ .Values.aws.secret | quote }}
                   key: secret
             - name: AWS_BUCKET_INPUT_EVENT_QUEUE_URL
               value: {{ .Values.aws.sqsUrl | quote }}

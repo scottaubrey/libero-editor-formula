@@ -28,6 +28,7 @@ articleStore:
 database:
   # database.secret -- name of a secret with 'url' entries
   secret: libero-editor--database-secret
+  sslValidate: 'true'
   name: 'editor'
 
 aws:

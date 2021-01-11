@@ -23,6 +23,7 @@ articleStore:
     tag: latest
     pullPolicy: Always
   port: 8080
+<<<<<<< HEAD
   replicaCount: 1
 
 database:
@@ -37,3 +38,6 @@ aws:
   secret: libero-editor--aws-secret
   sqsUrl: ''
   bucket: 'prod-elife-editor'
+=======
+  replicaCount: 1
+>>>>>>> master

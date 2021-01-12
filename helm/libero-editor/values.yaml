@@ -24,3 +24,16 @@ articleStore:
     pullPolicy: Always
   port: 8080
   replicaCount: 1
+
+database:
+  # database.secret -- name of a secret with 'url' entries
+  secret: libero-editor--database-secret
+  sslValidate: 'true'
+  name: 'editor'
+
+aws:
+  region: ''
+  # aws.secret -- name of a secret with 'key' and 'secret' entries
+  secret: libero-editor--aws-secret
+  sqsUrl: ''
+  bucket: 'prod-elife-editor'

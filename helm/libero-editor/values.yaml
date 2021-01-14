@@ -32,7 +32,7 @@ database:
   name: 'editor'
 
 aws:
-  region: ''
+  region: 'us-east-1'
   # aws.secret -- name of a secret with 'key' and 'secret' entries
   secret: libero-editor--aws-secret
   sqsUrl: ''

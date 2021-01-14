@@ -61,6 +61,6 @@ spec:
             - name: AWS_BUCKET_INPUT_EVENT_QUEUE_URL
               value: {{ .Values.aws.sqsUrl | quote }}
             - name: AWS_ENDPOINT
-              value: "s3.{{ .Values.aws.region | quote }}.amazonaws.com"
+              value: "s3.{{ .Values.aws.region }}.amazonaws.com"
             - name: AWS_EDITOR_BUCKET
               value: {{ .Values.aws.bucket | quote }}

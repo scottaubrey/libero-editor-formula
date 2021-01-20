@@ -37,11 +37,20 @@ spec:
             tcpSocket:
               port: http
           env:
-            - name: DB_URL
+            - name: DB_ENDPOINT
+              value: {{ .Values.database.endpoint | quote }}
+            - name: DB_URI_QUERY
+              value: {{ .Values.database.query | quote }}
+            - name: DB_USER
               valueFrom:
                 secretKeyRef:
                   name: {{ .Values.database.secret | quote }}
-                  key: url
+                  key: user
+            - name: DB_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: {{ .Values.database.secret | quote }}
+                  key: password
             - name: DB_NAME
               value: {{ .Values.database.name | quote }}
             - name: DB_SSL_VALIDATE

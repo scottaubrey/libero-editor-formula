@@ -26,7 +26,9 @@ articleStore:
   replicaCount: 1
 
 database:
-  # database.secret -- name of a secret with 'url' entries
+  endpoint: 'mongo:27017'
+  query: ''
+  # database.secret -- name of a secret with 'user' and 'password' entries
   secret: libero-editor--database-secret
   sslValidate: 'true'
   name: 'editor'

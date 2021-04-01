@@ -36,6 +36,8 @@ spec:
           readinessProbe:
             tcpSocket:
               port: http
+          resources:
+{{ toYaml .Values.resources | indent 12 }}
           env:
             - name: DB_ENDPOINT
               value: {{ .Values.database.endpoint | quote }}

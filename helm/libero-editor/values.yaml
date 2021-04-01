@@ -24,6 +24,7 @@ articleStore:
     pullPolicy: Always
   port: 8080
   replicaCount: 1
+  resources: {}
 
 database:
   endpoint: 'mongo:27017'

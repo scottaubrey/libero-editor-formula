@@ -26,6 +26,14 @@ articleStore:
   replicaCount: 1
   resources: {}
 
+transformer:
+  image:
+    repository: elifesciences/basex-transformer
+    tag: latest
+    pullPolicy: Always
+  replicaCount: 1
+  resources: {}
+
 database:
   endpoint: 'mongo:27017'
   query: ''

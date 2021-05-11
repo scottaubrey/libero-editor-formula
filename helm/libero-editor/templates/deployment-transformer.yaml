@@ -1,0 +1,40 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ include "libero-editor.fullname" . }}-basex-transformer
+  labels:
+    app.kubernetes.io/name: {{ include "libero-editor.name" . }}
+    helm.sh/chart: {{ include "libero-editor.chart" . }}
+    app.kubernetes.io/instance: {{ .Release.Name }}
+    app.kubernetes.io/managed-by: {{ .Release.Service }}
+    app.kubernetes.io/component: basex-transformer
+spec:
+  replicas: {{ .Values.transformer.replicaCount }}
+  selector:
+    matchLabels:
+      app.kubernetes.io/name: {{ include "libero-editor.name" . }}
+      app.kubernetes.io/instance: {{ .Release.Name }}
+      app.kubernetes.io/component: basex-transformer
+  template:
+    metadata:
+      labels:
+        app.kubernetes.io/name: {{ include "libero-editor.name" . }}
+        app.kubernetes.io/instance: {{ .Release.Name }}
+        app.kubernetes.io/component: basex-transformer
+    spec:
+      containers:
+        - name: {{ .Chart.Name }}-basex-transformer
+          image: "{{ .Values.transformer.image.repository }}:{{ .Values.transformer.image.tag }}"
+          imagePullPolicy: {{ .Values.transformer.image.pullPolicy }}
+          ports:
+            - name: http
+              containerPort: 8984
+              protocol: TCP
+          livenessProbe:
+            tcpSocket:
+              port: http
+          readinessProbe:
+            tcpSocket:
+              port: http
+          resources:
+{{ toYaml .Values.resources | indent 12 }}

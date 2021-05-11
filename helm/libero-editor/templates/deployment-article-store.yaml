@@ -75,3 +75,7 @@ spec:
               value: "s3.{{ .Values.aws.region }}.amazonaws.com"
             - name: AWS_EDITOR_BUCKET
               value: {{ .Values.aws.bucket | quote }}
+            - name: IMPORT_TRANSFORM_ENABLED
+              value: {{ .Values.articleStore.importTransformEnabled | quote }}
+            - name: IMPORT_TRANSFORM_URL
+              value: 'http://{{ include "libero-editor.fullname" . }}-basex-transformer:8984'

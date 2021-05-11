@@ -78,4 +78,4 @@ spec:
             - name: IMPORT_TRANSFORM_ENABLED
               value: {{ .Values.articleStore.importTransformEnabled | quote }}
             - name: IMPORT_TRANSFORM_URL
-              value: 'http://{{ include "libero-editor.fullname" . }}-basex-transformer:8984'
+              value: 'http://{{ include "libero-editor.fullname" . }}-basex-transformer:8984/v1tov2'

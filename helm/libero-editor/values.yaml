@@ -25,6 +25,7 @@ articleStore:
   port: 8080
   replicaCount: 1
   resources: {}
+  importTransformEnabled: 'false'
 
 transformer:
   image:

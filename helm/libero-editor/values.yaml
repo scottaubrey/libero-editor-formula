@@ -8,6 +8,10 @@ ingress:
     path: /api/v1(/|$)(.*)
     annotations:
       nginx.ingress.kubernetes.io/rewrite-target: /$2
+  pdfService:
+    path: /pdf(/|$)(.*)
+    annotations:
+      nginx.ingress.kubernetes.io/rewrite-target: /$2
 
 client:
   image:
@@ -33,6 +37,15 @@ transformer:
     tag: latest
     pullPolicy: Always
   replicaCount: 1
+  resources: {}
+
+pdfService:
+  image:
+    repository: liberoadmin/editor-pdf-service
+    tag: latest
+    pullPolicy: Always
+  replicaCount: 1
+  port: 4001
   resources: {}
 
 database:

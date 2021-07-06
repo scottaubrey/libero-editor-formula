@@ -1,0 +1,40 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ include "libero-editor.fullname" . }}-pdf-service
+  labels:
+    app.kubernetes.io/name: {{ include "libero-editor.name" . }}
+    helm.sh/chart: {{ include "libero-editor.chart" . }}
+    app.kubernetes.io/instance: {{ .Release.Name }}
+    app.kubernetes.io/managed-by: {{ .Release.Service }}
+    app.kubernetes.io/component: pdf-service
+spec:
+  replicas: {{ .Values.pdfService.replicaCount }}
+  selector:
+    matchLabels:
+      app.kubernetes.io/name: {{ include "libero-editor.name" . }}
+      app.kubernetes.io/instance: {{ .Release.Name }}
+      app.kubernetes.io/component: pdf-service
+  template:
+    metadata:
+      labels:
+        app.kubernetes.io/name: {{ include "libero-editor.name" . }}
+        app.kubernetes.io/instance: {{ .Release.Name }}
+        app.kubernetes.io/component: pdf-service
+    spec:
+      containers:
+        - name: {{ .Chart.Name }}-pdf-service
+          image: "{{ .Values.pdfService.image.repository }}:{{ .Values.pdfService.image.tag }}"
+          imagePullPolicy: {{ .Values.pdfService.image.pullPolicy }}
+          ports:
+            - name: http
+              containerPort: {{ .Values.pdfService.port }}
+              protocol: TCP
+          livenessProbe:
+            tcpSocket:
+              port: http
+          readinessProbe:
+            tcpSocket:
+              port: http
+          resources:
+{{ toYaml .Values.resources | indent 12 }}

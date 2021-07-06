@@ -38,3 +38,25 @@ spec:
               port: http
           resources:
 {{ toYaml .Values.resources | indent 12 }}
+          env:
+            - name: ARTICLE_STORE_PATH
+              value: 'http://{{ include "libero-editor.fullname" . }}-article-store:8080/articles/'
+            - name: EDITOR_URL
+              value: 'https://{{ .Values.ingress.host }}'
+            - name: GENERATION_START_URL
+              valueFrom:
+                secretKeyRef:
+                  name: {{ .Values.pdfService.secret | quote }}
+                  key: startUrl
+            - name: GENERATION_STATUS_URL
+              valueFrom:
+                secretKeyRef:
+                  name: {{ .Values.pdfService.secret | quote }}
+                  key: statusUrl
+            - name: GENERATION_API_KEY
+              valueFrom:
+                secretKeyRef:
+                  name: {{ .Values.pdfService.secret | quote }}
+                  key: apiKey
+                  
+

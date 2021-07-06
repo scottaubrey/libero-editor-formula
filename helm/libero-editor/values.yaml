@@ -47,6 +47,7 @@ pdfService:
   replicaCount: 1
   port: 4001
   resources: {}
+  secret: libero-editor--pdf-secret
 
 database:
   endpoint: 'mongo:27017'

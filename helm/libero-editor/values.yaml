@@ -30,6 +30,7 @@ articleStore:
   replicaCount: 1
   resources: {}
   importTransformEnabled: 'false'
+  exportTransformEnabled: 'false'
 
 transformer:
   image:

@@ -60,6 +60,7 @@ database:
 
 aws:
   region: 'us-east-1'
+  endpoint: ''
   # aws.secret -- name of a secret with 'key' and 'secret' entries
   secret: libero-editor--aws-secret
   sqsUrl: ''

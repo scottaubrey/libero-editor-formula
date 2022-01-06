@@ -17,6 +17,16 @@ spec:
     http:
       paths:
         - path: {{ .Values.ingress.pdfService.path }}
+          {{- if semverCompare ">=1.18-0" $.Capabilities.KubeVersion.GitVersion }}
+          pathType: ImplementationSpecific
+          {{- end }}
           backend:
+            {{- if semverCompare ">=1.19-0" $.Capabilities.KubeVersion.GitVersion }}
+            service:
+              name: {{ include "libero-editor.fullname" . }}-pdf-service
+              port:
+                number: {{ .Values.pdfService.port }}
+            {{- else }}
             serviceName: {{ include "libero-editor.fullname" . }}-pdf-service
             servicePort: {{ .Values.pdfService.port }}
+            {{- end }}

@@ -72,7 +72,11 @@ spec:
             - name: AWS_BUCKET_INPUT_EVENT_QUEUE_URL
               value: {{ .Values.aws.sqsUrl | quote }}
             - name: AWS_ENDPOINT
+            {{- if .Values.aws.endpoint }}
+              value: "{{ .Values.aws.endpoint }}"
+            {{ else }}
               value: "s3.{{ .Values.aws.region }}.amazonaws.com"
+            {{ end -}}
             - name: AWS_EDITOR_BUCKET
               value: {{ .Values.aws.bucket | quote }}
             - name: IMPORT_TRANSFORM_ENABLED

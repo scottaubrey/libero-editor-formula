@@ -22,12 +22,12 @@ spec:
         app.kubernetes.io/instance: {{ .Release.Name }}
         app.kubernetes.io/component: article-store
     spec:
+      nodeSelector:
+        kubernetes.io/arch: amd64
       containers:
         - name: {{ .Chart.Name }}-article-store
           image: "{{ .Values.articleStore.image.repository }}:{{ .Values.articleStore.image.tag }}"
           imagePullPolicy: {{ .Values.articleStore.image.pullPolicy }}
-          nodeSelector:
-            kubernetes.io/arch: amd64
           ports:
             - name: http
               containerPort: 8080

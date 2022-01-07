@@ -22,12 +22,12 @@ spec:
         app.kubernetes.io/instance: {{ .Release.Name }}
         app.kubernetes.io/component: pdf-service
     spec:
+      nodeSelector:
+        kubernetes.io/arch: amd64
       containers:
         - name: {{ .Chart.Name }}-pdf-service
           image: "{{ .Values.pdfService.image.repository }}:{{ .Values.pdfService.image.tag }}"
           imagePullPolicy: {{ .Values.pdfService.image.pullPolicy }}
-          nodeSelector:
-            kubernetes.io/arch: amd64
           ports:
             - name: http
               containerPort: {{ .Values.pdfService.port }}

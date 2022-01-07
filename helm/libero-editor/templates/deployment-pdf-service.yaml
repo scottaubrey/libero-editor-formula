@@ -26,6 +26,8 @@ spec:
         - name: {{ .Chart.Name }}-pdf-service
           image: "{{ .Values.pdfService.image.repository }}:{{ .Values.pdfService.image.tag }}"
           imagePullPolicy: {{ .Values.pdfService.image.pullPolicy }}
+          nodeSelector:
+            kubernetes.io/arch: amd64
           ports:
             - name: http
               containerPort: {{ .Values.pdfService.port }}
@@ -58,5 +60,3 @@ spec:
                 secretKeyRef:
                   name: {{ .Values.pdfService.secret | quote }}
                   key: apiKey
-                  
-
